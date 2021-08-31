@@ -1,0 +1,22 @@
+*, *::after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #A4C9D3;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #6C91A1;
+    border-radius: 5px;
+    border: 2px solid #A4C9D3;
+}
+
+
+::-webkit-scrollbar{
+    background-color: #fff;
+    height: 15px;
+}
