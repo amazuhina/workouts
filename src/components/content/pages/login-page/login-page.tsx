@@ -50,10 +50,11 @@ const SpanAuthStl = styled.span`
 const HelloTextStl = styled.div`
   width: 80%;
   display: flex;
-  text-align: center;
+  flex-direction: column;
   margin: 50px auto;
   p {
     font-weight: 600;
+    margin-top: 15px;
   }
 `
 
@@ -151,9 +152,15 @@ export const LoginPage: React.FunctionComponent = () => {
     return (
         <LoginPageStl>
             <HelloTextStl>
-                <p>Приветствую тебя в моем приложении для тренировок. К сожалению, оно работает в тестовом режиме,
-                    пока мы не подключили сервер. Но ты уже можешь с ним ознакомиться. Пожалуйста, заполни все поля
-                    из формы, для корректной работы.</p>
+                <div>
+                    <p>Приветствую тебя в моем приложении для тренировок. К сожалению, оно работает в тестовом режиме,
+                        пока мы не подключили пользовательскую часть к серверу. Но ты уже можешь с ним ознакомиться. Пожалуйста, заполни все поля
+                        из анкеты, для корректной работы.</p>
+                </div>
+                <div>
+                    <p>В окне Статистика ты сможешь отслеживать изменения веса. Для этого ставь отметки в окне Отчет.</p>
+                </div>
+
             </HelloTextStl>
             <LoginBoxStl>
                 <InputAuthStl type={'text'} value={email} onChange={event=> setEmail(event.target.value)}/>

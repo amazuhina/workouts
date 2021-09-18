@@ -50,10 +50,10 @@ export const InputGroup: React.FunctionComponent<InputGroupProps> = ({title, get
                 {
                     groupTitleAll.map(i =>
                         <BtnRadioStl
-                            onClick={() => {setter(i)}}
-                            clicked={getter === i}
+                            onClick={() => {setter(i.value)}}
+                            clicked={getter === i.value}
                         >
-                            {i}
+                            {i.title}
                         </BtnRadioStl>
                     )
                 }

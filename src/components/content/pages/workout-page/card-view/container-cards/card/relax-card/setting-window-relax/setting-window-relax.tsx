@@ -32,12 +32,17 @@ const BtnMoveWorkoutStl = styled.button`
   }
 `
 
-export const SettingWindowRelax: React.FunctionComponent = ({}) => {
+
+interface SettingWindowRelaxProps {
+    onSkipWorkout: any
+}
+
+export const SettingWindowRelax: React.FunctionComponent<SettingWindowRelaxProps> = ({onSkipWorkout}) => {
 
 
     return (
         <SettingWindowStl>
-            <BtnMoveWorkoutStl>
+            <BtnMoveWorkoutStl onClick={onSkipWorkout}>
                10 000 шагов не пройдены
             </BtnMoveWorkoutStl>
         </SettingWindowStl>

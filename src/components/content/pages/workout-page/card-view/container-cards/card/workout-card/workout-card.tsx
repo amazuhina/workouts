@@ -4,7 +4,7 @@ import {SettingWindowWorkout} from "./setting-window-workout/setting-window-work
 import {AddData, addWorkoutStatisticsData} from "../../../../../../../../database/databaseConst";
 import {IWorkoutCard } from '../../../../../../../../redux/workout-month-plan.slice';
 
-const WorkoutCardStl = styled.div`
+const WorkoutCardStl = styled.div<{clicked: boolean, clickedSkip: boolean}>`
   border-radius: 15px;
   background-color: #BE9E72;
   min-width: 250px;
@@ -14,6 +14,12 @@ const WorkoutCardStl = styled.div`
   padding: 10px;
   position: relative;
   margin-right: 15px;
+  ${({clicked}) => clicked && `
+    background-color: #799B65;
+  `}
+  ${({clickedSkip}) => clickedSkip && `
+    background-color: #B66B61;
+  `}
 `
 
 const BtnSettingStl = styled.button`
@@ -40,11 +46,7 @@ const BtnDoneStl = styled.button<{clicked: boolean}>`
   margin: 0 auto;
   position: absolute;
   bottom: 30px;
-  left: 10%;  
-  ${({clicked}) => clicked && `
-    background-color: #9B876B;
-    color: #fff;
-  `}
+  left: 10%;    
 `
 
 const TextWorkoutStl = styled.div`
@@ -67,8 +69,17 @@ interface IWorkoutCardProps {
 
 
 export const WorkoutCard: React.FunctionComponent<IWorkoutCardProps> = ({workoutArr, counter, date, isHaveMove}) => {
+
+
+
     const [isWorkoutDone, setIsWorkoutDone] = useState<boolean>(false)
     const [isShowSetting, setIsShowSetting] = useState<boolean>(false)
+    const [isWorkoutSkip, setIsWorkoutSkip] = useState<boolean>(false)
+
+    const onSkipWorkout = () => {
+        setIsWorkoutSkip(true)
+        setIsShowSetting(false)
+    }
 
     const openSetting = () => {
         setIsShowSetting(true)
@@ -108,14 +119,14 @@ export const WorkoutCard: React.FunctionComponent<IWorkoutCardProps> = ({workout
 
     return (
         //@ts-ignore
-        <WorkoutCardStl ref={ref}>
+        <WorkoutCardStl ref={ref} clicked={isWorkoutDone} clickedSkip={isWorkoutSkip}>
             <BtnSettingStl
                 onClick={openSetting}
             >
                 ...
             </BtnSettingStl>
                 {
-                    isShowSetting && <SettingWindowWorkout dateOfCard={date} isHaveMove={isHaveMove}/>
+                    isShowSetting && <SettingWindowWorkout dateOfCard={date} isHaveMove={isHaveMove} onSkipWorkout={onSkipWorkout}/>
                 }
             <TextWorkoutStl>
                 <ul>

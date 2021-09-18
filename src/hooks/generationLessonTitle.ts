@@ -22,6 +22,12 @@ export const generationLessonTitle = (workoutTime: number, groupTitle: string) =
         // @ts-ignore
         .shuffle()
 
+
+    console.log(data)
+    console.log(workoutTime)
+    console.log(groupTitle)
+    console.log(workoutExs)
+
     const workoutExCount = countLessons(workoutTime)
 
     const actualExs: Array<IWorkoutCard> = workoutExs

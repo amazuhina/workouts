@@ -6,7 +6,16 @@ export const workoutCountAll = [2, 3, 4, 7]
 
 export const workoutTimeAll = [30, 45, 60]
 
-export const groupTitleAll = ['верх', 'низ', 'пресс', 'всё']
+export interface IGroupTitle {
+    title: string
+    value: string
+}
+export const groupTitleAll: Array<IGroupTitle> = [
+    {title: 'верх', value: 'upper'},
+    {title: 'низ', value: 'lower'},
+    {title: 'пресс', value: 'abs'},
+    {title: 'все', value: 'all'}
+]
 
 export const dateDayDigital = 86400001
 

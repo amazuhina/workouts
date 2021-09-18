@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import {SettingWindowRelax} from "./setting-window-relax/setting-window-relax";
 import {AddData, addWorkoutStatisticsData} from "../../../../../../../../database/databaseConst";
 
-const RelaxCardStl = styled.div`
+const RelaxCardStl = styled.div<{clicked: boolean, clickedSkip: boolean}>`
   border-radius: 15px;
   background-color: #E3CD99;
   min-width: 250px;
@@ -13,6 +13,12 @@ const RelaxCardStl = styled.div`
   padding: 10px;
   position: relative;
   margin-right: 15px;
+  ${({clicked}) => clicked && `
+    background-color: #799B65;
+  `}
+  ${({clickedSkip}) => clickedSkip && `
+    background-color: #B66B61;
+  `}
 `
 
 const BtnSettingStl = styled.button`
@@ -41,10 +47,6 @@ const BtnDoneStl = styled.button<{clicked: boolean}>`
   position: absolute;
   bottom: 30px;
   left: 10%;
-  ${({clicked}) => clicked && `
-    background-color: #9B876B;
-    color: #fff;
-  `}
 `
 
 
@@ -65,6 +67,12 @@ export const RelaxCard: React.FunctionComponent = () => {
 
     const [isWorkoutDone, setIsWorkoutDone] = useState<boolean>(false)
     const [isShowSetting, setIsShowSetting] = useState<boolean>(false)
+    const [isWorkoutSkip, setIsWorkoutSkip] = useState<boolean>(false)
+
+    const onSkipWorkout = () => {
+        setIsWorkoutSkip(true)
+        setIsShowSetting(false)
+    }
 
     const openSetting = () => {
         setIsShowSetting(true)
@@ -105,14 +113,14 @@ export const RelaxCard: React.FunctionComponent = () => {
 
     return (
         //@ts-ignore
-        <RelaxCardStl ref={ref}>
+        <RelaxCardStl ref={ref} clicked={isWorkoutDone} clickedSkip={isWorkoutSkip}>
             <BtnSettingStl
                 onClick={openSetting}
             >
                 ...
             </BtnSettingStl>
             {
-                isShowSetting && <SettingWindowRelax/>
+                isShowSetting && <SettingWindowRelax onSkipWorkout={onSkipWorkout}/>
             }
             <TextRelaxStl>
                 <h3>День отдыха</h3>

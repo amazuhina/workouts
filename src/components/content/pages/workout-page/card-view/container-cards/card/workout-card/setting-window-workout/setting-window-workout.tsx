@@ -28,7 +28,7 @@ const SettingWindowStl = styled.div`
   z-index: 1000;
 `
 
-const BtnMoveWorkoutStl = styled.button<{isDisapled: boolean}>`
+const BtnMoveWorkoutStl = styled.button<{isDisabled: boolean}>`
   border-radius: 15px;
   background-color: #fff;
   padding: 5px 10px;
@@ -37,7 +37,7 @@ const BtnMoveWorkoutStl = styled.button<{isDisapled: boolean}>`
   color: #BE9E72;
   cursor: pointer;
   
-  ${({isDisapled}) => isDisapled && `
+  ${({isDisabled}) => isDisabled && `
     opacity: .5;
   `}
   
@@ -50,9 +50,10 @@ const BtnMoveWorkoutStl = styled.button<{isDisapled: boolean}>`
 export interface SettingWindowWorkoutProps {
     dateOfCard: number
     isHaveMove: boolean
+    onSkipWorkout: any
 }
 
-export const SettingWindowWorkout: React.FunctionComponent<SettingWindowWorkoutProps> = ({dateOfCard, isHaveMove}) => {
+export const SettingWindowWorkout: React.FunctionComponent<SettingWindowWorkoutProps> = ({dateOfCard, isHaveMove, onSkipWorkout}) => {
 
     const dispatch = useDispatch()
 
@@ -62,7 +63,6 @@ export const SettingWindowWorkout: React.FunctionComponent<SettingWindowWorkoutP
             date: Date.now(),
             workoutIsDone: false,
         }
-
         addWorkoutStatisticsData(data)
     }
 
@@ -79,14 +79,14 @@ export const SettingWindowWorkout: React.FunctionComponent<SettingWindowWorkoutP
     return (
         <SettingWindowStl>
             <BtnMoveWorkoutStl
-                isDisapled={!isHaveMove}
+                isDisabled={!isHaveMove}
                 onClick={moveWorkout}
             >
                 Перенести тренировку
             </BtnMoveWorkoutStl>
             <BtnMoveWorkoutStl
-                isDisapled={false}
-                onClick={onWorkoutSkip}
+                isDisabled={false}
+                onClick={onSkipWorkout}
             >
                 Пропустить тренировку
             </BtnMoveWorkoutStl>
